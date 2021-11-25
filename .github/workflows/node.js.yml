@@ -11,6 +11,7 @@ on:
     
 env:
   DB_URI: ${{ secrets.DB_URI }}
+  DOCKER_DB_URI: ${{ secrets.DOCKER_DB_URI }}
 
 jobs:
   build:
