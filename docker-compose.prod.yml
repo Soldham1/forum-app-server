@@ -8,12 +8,16 @@ services:
       context: .
       args: 
         NODE_ENV: production
+
     environment:
       - NODE_ENV=production
       - DB_URI=${DB_URI}
       - DOCKER_DB_URI=${DOCKER_DB_URI}
       - JWT_SECRET=${JWT_SECRET}
       - PORT=${PORT}
+    command: node server.js
+  
+  mongo: 
+    environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-    command: node server.js
