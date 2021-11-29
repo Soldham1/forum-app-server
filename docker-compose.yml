@@ -12,8 +12,6 @@ services:
 
   mongo:
     image: mongo
-    env_file:
-      - ./.env.docker
     volumes:
       - mongo-db:/data/db
 
