@@ -10,4 +10,7 @@ services:
         NODE_ENV: production
     environment:
       - NODE_ENV=production
+      - DOCKER_DB_URI=${DOCKER_DB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - PORT=${PORT}
     command: node server.js
