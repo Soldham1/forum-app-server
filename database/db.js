@@ -5,9 +5,9 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
-    console.log(process.env.DOCKER_DB_URI);
+    console.log(process.env.DB_URI);
     // Connects db
-    await mongoose.connect(process.env.DOCKER_DB_URI, {
+    await mongoose.connect(process.env.DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
