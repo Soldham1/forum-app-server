@@ -1,16 +1,22 @@
 const express = require("express");
-const connectDB = require("./database/db");
 const dotenv = require("dotenv");
+const cors = require("cors");
+const statusMonitor = require("express-status-monitor");
+const connectDB = require("./database/db");
 
 dotenv.config();
 
 const app = express();
+
+app.use(statusMonitor());
 
 connectDB();
 
 app.enable("trust proxy");
 
 app.use(express.json({ extended: false }));
+
+app.use(cors());
 
 app.get("/", (req, res) => res.send("API Running"));
 
