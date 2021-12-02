@@ -2,9 +2,12 @@ const assert = require("assert");
 const connectDB = require("../database/db");
 const disconnectDB = require("../database/disconnect");
 const User = require("../models/User");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 describe("User database", function () {
-  connectDB();
+  connectDB(process.env.TEST_DB_URI);
   it("Should save without error", function (done) {
     var user = new User({ username: "test123", password: "123456" });
     user.save().then(function () {

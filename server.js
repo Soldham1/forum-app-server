@@ -10,7 +10,7 @@ const app = express();
 
 app.use(statusMonitor());
 
-connectDB();
+connectDB(process.env.DOCKER_DB_URI);
 
 app.enable("trust proxy");
 
