@@ -31,7 +31,7 @@ router.post("/", auth, async (req, res) => {
 
     await disc.save();
 
-    res.send("Post created");
+    res.json(disc.id);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

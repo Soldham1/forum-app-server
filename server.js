@@ -10,7 +10,7 @@ const app = express();
 
 app.use(statusMonitor());
 
-connectDB(process.env.DOCKER_DB_URI);
+connectDB();
 
 app.enable("trust proxy");
 
@@ -28,3 +28,5 @@ app.use("/discs", require("./routes/api/discs"));
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+module.exports = app;

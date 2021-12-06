@@ -11,6 +11,9 @@ on:
     
 env:
   TEST_DB_URI: ${{ secrets.TEST_DB_URI }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  PORT: ${{ secrets.PORT }}
+  NODE_ENV: ${{ secrets.NODE_ENV }}
 
 jobs:
   build:

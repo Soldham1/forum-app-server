@@ -3,8 +3,14 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const connectDB = async (db) => {
+const connectDB = async () => {
   try {
+    let db = process.env.DOCKER_DB_URI;
+
+    if (process.env.NODE_ENV === "testing") {
+      db = process.env.TEST_DB_URI;
+    }
+
     // Connects db
     await mongoose.connect(db, {
       useNewUrlParser: true,
@@ -12,7 +18,6 @@ const connectDB = async (db) => {
     });
     console.log("MongoDB Connected...");
   } catch (err) {
-    console.log("fails here");
     console.error(err.message);
     // Exits process with failure
     process.exit(1);
