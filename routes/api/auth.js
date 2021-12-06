@@ -32,7 +32,7 @@ router.post("/", [requireUsername, requirePassword], async (req, res) => {
     let user = await User.findOne({ username });
 
     if (!user) {
-      return res.status(400).send("Username not found");
+      return res.status(404).send("Username not found");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
