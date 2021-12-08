@@ -17,8 +17,9 @@ Sam Oldham, Newcastle University  ([s.l.oldham1@newcastle.ac.uk](mailto:s.l.oldh
 Node version 12,14 or 16
 
 ### Installation
-
+```
 npm install
+```
 
 ### Running Locally
 
