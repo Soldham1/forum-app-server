@@ -17,21 +17,6 @@ const DiscSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  comments: [
-    {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
-      },
-      text: {
-        type: String,
-        required: true,
-      },
-      username: {
-        type: String,
-      },
-    },
-  ],
   date: {
     type: Date,
     default: Date.now,

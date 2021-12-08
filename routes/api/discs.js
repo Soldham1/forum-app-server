@@ -82,46 +82,4 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
-// @route   POST discs/comment
-// @desc    Post a comment
-// @access  Private
-router.post("/comment", auth, async (req, res) => {
-  try {
-    let user = await User.findById(req.user.id);
-
-    const disc = await Disc.findById(req.query.id);
-
-    if (!disc) {
-      return res.status(404).json({ msg: "Discussion not found" });
-    }
-
-    const newComment = {
-      user: req.user.id,
-      text: req.body.text,
-      username: user.username,
-    };
-
-    disc.comments.unshift(newComment);
-
-    await disc.save();
-
-    res.json(disc.comments);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
-  }
-});
-
-// @route   DELETE discs/comment
-// @desc    Delete a comment
-// @access  Private
-router.delete("/comment", auth, async (req, res) => {
-  try {
-    // @TODO  implement
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
-  }
-});
-
 module.exports = router;
