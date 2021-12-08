@@ -7,6 +7,7 @@ const connectDB = async () => {
   try {
     let db = process.env.DOCKER_DB_URI;
 
+    // Decides which uri to use depending on the environment
     if (process.env.NODE_ENV === "testing") {
       db = process.env.TEST_DB_URI;
     }

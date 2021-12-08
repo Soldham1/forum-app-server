@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const { validationResult } = require("express-validator");
+
 // Import middleware
 const {
   requireUsername,
@@ -13,6 +14,7 @@ const {
 const User = require("../../models/User");
 
 const router = express.Router();
+
 dotenv.config();
 
 // @route   POST auth
@@ -29,12 +31,14 @@ router.post("/", [requireUsername, requirePassword], async (req, res) => {
     // Destructure request data
     const { username, password } = req.body;
 
+    // Looks up user in db
     let user = await User.findOne({ username });
 
     if (!user) {
       return res.status(404).send("Username not found");
     }
 
+    // Compares passwords
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {

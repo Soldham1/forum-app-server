@@ -1,4 +1,0 @@
-Test Docker prod and dev
-Push to git 
-Test ci
-comment code and readme

@@ -1,8 +1,16 @@
+# Dependency directory
 node_modules
-Dockerfile
+
+# Test file
 test
-.dockerignore
+
+# Git files
 .git
 .github
 .gitignore
+
+# Docker files
+Dockerfile
+.dockerignore
+# All docker compose files
 docker-compose*

@@ -1,5 +1,6 @@
 const express = require("express");
 
+// Import middleware
 const auth = require("../../middleware/auth");
 
 // Import DB
@@ -27,8 +28,10 @@ router.post("/", auth, async (req, res) => {
 
     let data = { userId, username, title, content };
 
+    // Create new user
     disc = new Disc(data);
 
+    // Save to db
     await disc.save();
 
     res.json(disc.id);
@@ -43,6 +46,7 @@ router.post("/", auth, async (req, res) => {
 // @access  Private
 router.get("/", auth, async (req, res) => {
   try {
+    // Gets all discussions and sorts so the newest is at the top
     let discussions = await Disc.find().sort({ date: -1 });
     res.json(discussions);
   } catch (err) {
@@ -56,17 +60,19 @@ router.get("/", auth, async (req, res) => {
 // @access  Private
 router.delete("/", auth, async (req, res) => {
   try {
+    // Finds discussion
     const disc = await Disc.findById(req.query.id);
 
     if (!disc) {
       return res.status(404).json({ msg: "Discussion not found" });
     }
 
-    // Check user
+    // Check users permissions
     if (disc.userId.toString() !== req.user.id) {
       return res.status(401).json({ msg: "User not authorized" });
     }
 
+    // Deletes discussion
     await disc.remove();
 
     res.send("Discussion removed");

@@ -6,27 +6,32 @@ const server = require("../server");
 
 dotenv.config();
 
+// Tempory user for testing
 const tempUser = {
   username: "testUser",
   password: "Password",
 };
 
+// Tempory discussion for testing
 const tempDiscussion = {
   username: "testUser",
   title: "test",
   content: "This is a test discussion",
 };
 
+// Defines token variable for use later
 let tempToken;
 
 let discID;
 
+// Sets timeout for each test
 before(function (done) {
   this.timeout(3000);
   setTimeout(done, 2000);
 });
 
 describe("POST /users", () => {
+  // Sends request with valid new user credentials
   it("should register new user", (done) => {
     request(server)
       .post("/users")
@@ -39,6 +44,7 @@ describe("POST /users", () => {
       .catch((err) => done(err));
   });
 
+  // Sends request with invalid existing username
   it("shouldn't accept existing username", (done) => {
     request(server)
       .post("/users")
@@ -53,6 +59,7 @@ describe("POST /users", () => {
 });
 
 describe("POST /auth", () => {
+  // Sends request with correct login credentials
   it("should accept correct credentials", (done) => {
     request(server)
       .post("/auth")
@@ -66,6 +73,7 @@ describe("POST /auth", () => {
       .catch((err) => done(err));
   });
 
+  // Sends request with invalid password
   it("shouldn't accept invalid password", (done) => {
     tempUser.password = "wrongpassword";
     request(server)
@@ -79,6 +87,7 @@ describe("POST /auth", () => {
       .catch((err) => done(err));
   });
 
+  // Sends request with non-exisitng invalid username
   it("shouldn't accept non-exisiting username", (done) => {
     tempUser.username = "asdfgh";
     request(server)
@@ -94,6 +103,7 @@ describe("POST /auth", () => {
 });
 
 describe("POST /discs", () => {
+  // Sends request for a valid new discussion
   it("should post a new discussion", (done) => {
     request(server)
       .post("/discs")
@@ -112,6 +122,7 @@ describe("POST /discs", () => {
 });
 
 describe("GET /discs", () => {
+  // Sends request to get all discussions with a valid token
   it("should get all discussions", (done) => {
     request(server)
       .get("/discs")
@@ -128,6 +139,7 @@ describe("GET /discs", () => {
       });
   });
 
+  // Sends request to get all discussions without a token
   it("shouldn't get all discussions without token", (done) => {
     request(server)
       .get("/discs")
@@ -143,6 +155,7 @@ describe("GET /discs", () => {
 });
 
 describe("DELETE /discs", () => {
+  // Sends a request with valid delete permissions
   it("should delete discussion", (done) => {
     request(server)
       .delete("/discs")
@@ -159,6 +172,7 @@ describe("DELETE /discs", () => {
   });
 });
 
+// Deletes tempory user after the tests
 after(async () => {
   try {
     await User.deleteOne({ username: "testUser" });

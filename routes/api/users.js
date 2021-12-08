@@ -3,8 +3,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const { validationResult } = require("express-validator");
+
 // Import DB
 const User = require("../../models/User");
+
 // Import middleware
 const {
   requireUsername,
@@ -12,6 +14,7 @@ const {
 } = require("../../middleware/sanitisers/reglogin");
 
 const router = express.Router();
+
 dotenv.config();
 
 // @route   POST users
@@ -30,6 +33,7 @@ router.post("/", [requireUsername, requirePassword], async (req, res) => {
 
     let data = { username, password };
 
+    // Checks for existing username
     let user = await User.findOne({ username });
     if (user) {
       return res.status(400).send("Username already in use");
