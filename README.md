@@ -20,21 +20,20 @@ Node version 12,14 or 16
 ```
 npm install
 ```
-
 ### Running Locally
-
+```
 npm run dev
-
+```
 ### Running Tests
-
+```
 npm test
-
+```
 ## Deployment
 
 ### Local
-
+```
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build -V
-
+```
 ## Contributing
 
 ### Main Branch
